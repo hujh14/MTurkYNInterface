@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Amazon Mechnical Turk Yes/No Interface">
+    <meta name="author" content="Jeffrey Hu">
+
+    <title>YesNoInterface</title>
+
+    <!-- Bootstrap -->
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ -->
+
+    <!-- Theme CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="questionDiv">
+        <button onclick="start(); " id="startButton" type="button" style="">Instruction</button>
+        <span> Is this ${question}? </span>
+        <input type="submit" id="submitButton" value="Submit (? images left)" disabled onclick="return confirmSubmit()">
+    </div>
+
+    <div id="clarificationDiv">
+        <p><b>Definition</b>: A large open office space which is subdivided into individual workspaces by partition walls.</p>
+    </div>
+
+    <div id="contentDiv">
+        <div id="holderDiv-3" class="focus3"><p>No</p><p>Yes</p><img id="holderImage-3"></div>
+        <div id="holderDiv-2" class="focus2"><p>No</p><p>Yes</p><img id="holderImage-2"></div>
+        <div id="holderDiv-1" class="focus1"><p>No</p><p>Yes</p><img id="holderImage-1"></div>
+        <div id="holderDiv0" class="focus"><p>No</p><p>Yes</p><img id="holderImage0"></div>
+        <div id="holderDiv1" class="focus1"><p>No</p><p>Yes</p><img id="holderImage1"></div>
+        <div id="holderDiv2" class="focus2"><p>No</p><p>Yes</p><img id="holderImage2"></div>
+        <div id="holderDiv3" class="focus3"><p>No</p><p>Yes</p><img id="holderImage3"></div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; MTurkYesNoInterface 2017</p>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="js/io.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
