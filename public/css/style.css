@@ -42,7 +42,7 @@ a {
 
 #contentDiv {
   width: 1000px;
-  height: 500px;
+  height: 300px;
   display: table;
   text-align: center;
   margin-left: auto;
@@ -82,7 +82,7 @@ a {
     padding-right: 12px;    
     padding-top: 0px;   
     padding-bottom: 0px;    
-  width: 500px; height: 100%;
+  width: 600px; height: 100%;
 } 
 .focus1{ 
   display: table-cell;
@@ -104,8 +104,8 @@ a {
 } 
 
 .focus img{ 
-  max-width: 500px;
-  max-height: 500px;
+  max-width: 600px;
+  max-height: 400px;
   display: block;
   margin-left: auto;
   margin-right: auto;

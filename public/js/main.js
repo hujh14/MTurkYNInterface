@@ -6,12 +6,10 @@ var answers = [];
 var callback = function (json) {
     console.log(json);
     var task = JSON.parse(json);
-    var question = task["question"];
     var category = task["category"];
     num_of_images = task["num_of_images"];
     answers = new Array(num_of_images).fill(null);
 
-    $('#questionDiv span').text(question);
     $('#categoryDiv span').text(category);
     updateImages();
 }
