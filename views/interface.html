@@ -19,18 +19,18 @@
 
     <div id="questionDiv">
         <button onclick="toggleClarification(); " type="button">Instruction</button>
-        <span> Is this annotation correct? </span>
+        <span> Does this annotation need major improvements? </span>
         <input type="submit" id="submitButton" value="Submit (? images left)" disabled onclick="return confirmSubmit()">
     </div>
 
     <div id="clarificationDiv">
         <dl>
-            <dt>An annotation is <b>correct</b> if: </dt>
-                <dd>- the category is correct.</dd>
-                <dd>- the pixels are highlighted <b>if and only if</b> they belong to that category.</dd>
-                <dd>- the annotation cannot reasonably be expected to improve.</dd>
+            <dt>An annotation needs major improvements if: </dt>
+                <dd>- something not belong to the category was highlighted.</dd>
+                <dd>- something belonging to the category was not highlighted.</dd>
+                <dd>- something belonging to this category was entirely missed.</dd>
         </ul>
-        <i><b>Note: </b> Please keep in mind these annotations are computer generated.</i>
+        <i><b>Note: </b> These annotations are computer generated. At this stage, be lenient. Fine detail refinements along edges will be done later.</i>
     </div>
 
     <div id="categoryDiv">

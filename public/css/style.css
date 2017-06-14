@@ -8,12 +8,12 @@ a {
 }
 
 #questionDiv {
-    width: 822px;
+    width: 1000px;
     height: 30px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    font-size:30px;
+    font-size:25px;
     font-weight:bold;
 }
 #submitButton {
