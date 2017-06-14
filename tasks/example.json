@@ -10,7 +10,6 @@
     "../public/images/8.jpg", 
     "../public/images/9.jpg"
   ], 
-  "num_of_images": 9, 
-  "question": "Is this a bad annnotation?", 
-  "clarification": "A bad annotation is where the highlighted region incorrectly segments a region."
+  "num_of_images": 9,
+  "category": "example"
 }

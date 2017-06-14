@@ -11,11 +11,6 @@
 
     <title>YesNoInterface</title>
 
-    <!-- Bootstrap -->
-<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- -->
-
-    <!-- Theme CSS -->
     <link href="css/style.css" rel="stylesheet">
 
 </head>
@@ -23,15 +18,24 @@
 <body>
 
     <div id="questionDiv">
-        <button onclick="start(); " id="startButton" type="button" style="">Instruction</button>
-        <span> Is this ${question}? </span>
+        <button onclick="toggleClarification(); " type="button">Instruction</button>
+        <span> Is this annotation correct? </span>
         <input type="submit" id="submitButton" value="Submit (? images left)" disabled onclick="return confirmSubmit()">
     </div>
 
     <div id="clarificationDiv">
-        <p><b>Definition</b>: A large open office space which is subdivided into individual workspaces by partition walls.</p>
+        <dl>
+            <dt>An annotation is <b>correct</b> if: </dt>
+                <dd>- the category is correct.</dd>
+                <dd>- the pixels are highlighted <b>if and only if</b> they belong to that category.</dd>
+                <dd>- the annotation cannot reasonably be expected to improve.</dd>
+        </ul>
+        <i><b>Note: </b> Please keep in mind these annotations are computer generated.</i>
     </div>
 
+    <div id="categoryDiv">
+        <b>Category: </b><span>None</span>
+    </div>
     <div id="contentDiv">
         <div id="holderDiv-3" class="focus3"><p>No</p><p>Yes</p><img id="holderImage-3"></div>
         <div id="holderDiv-2" class="focus2"><p>No</p><p>Yes</p><img id="holderImage-2"></div>
@@ -46,7 +50,7 @@
     <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p>Copyright &copy; MTurkYesNoInterface 2017</p>
+            <p>Copyright &copy; YesNoInterface 2017</p>
         </div>
     </footer>
 

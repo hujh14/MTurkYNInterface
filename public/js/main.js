@@ -7,12 +7,12 @@ var callback = function (json) {
     console.log(json);
     var task = JSON.parse(json);
     var question = task["question"];
-    var clarification = task["clarification"];
+    var category = task["category"];
     num_of_images = task["num_of_images"];
     answers = new Array(num_of_images).fill(null);
 
     $('#questionDiv span').text(question);
-    $('#clarificationDiv p').text(clarification);
+    $('#categoryDiv span').text(category);
     updateImages();
 }
 get_task(callback);
@@ -78,6 +78,9 @@ function updateImages() {
 function confirmSubmit() {
     confirm(answers);
 }
+function toggleClarification() {
+    $("#clarificationDiv").toggle()
+}
 
 var keyIsDown = false;
 var timerHandle;
@@ -104,6 +107,7 @@ $(window).keyup(function(e){
     var key = e.which | e.keyCode;
 
     if(key === 32){
+        e.preventDefault();
         toggleAnswer();
     }
     else if(key === 37  || key == 65 || key === 39 || key == 68){

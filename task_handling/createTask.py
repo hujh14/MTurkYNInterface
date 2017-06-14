@@ -29,10 +29,10 @@ def createBatches(images):
         batches[n-1] = merge[len(merge)/2:]
     return batches
 
-
-question = "Is this a bad annnotation?"
-clarification = "A bad annotation is where the highlighted region incorrectly segments a region."
 folder = os.path.abspath(sys.argv[1])
+category = sys.argv[2]
+print "Category: {}".format(category)
+
 images = getImagePaths(folder)
 
 if len(images) == 0:
@@ -43,8 +43,7 @@ batches = createBatches(images)
 
 for batch in batches:
     data = {}
-    data["question"] = question
-    data["clarification"] = clarification
+    data["category"] = category
     data["images"] = batch
     data["num_of_images"] = len(batch)
 
