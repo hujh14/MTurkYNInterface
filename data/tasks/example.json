@@ -1,0 +1,15 @@
+{
+  "images": [
+    "demo/images/1.jpg", 
+    "demo/images/2.jpg", 
+    "demo/images/3.jpg", 
+    "demo/images/4.jpg", 
+    "demo/images/5.jpg", 
+    "demo/images/6.jpg", 
+    "demo/images/7.jpg", 
+    "demo/images/8.jpg", 
+    "demo/images/9.jpg"
+  ], 
+  "num_of_images": 9,
+  "category": "example"
+}

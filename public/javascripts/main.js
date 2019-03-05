@@ -3,34 +3,68 @@ var current_num = 0;
 var num_of_images = 0;
 var answers = [];
 
-var callback = function (json) {
-    console.log(json);
-    var task = JSON.parse(json);
-    var category = task["category"];
-    num_of_images = task["num_of_images"];
+window.onload = function() {
+    getTask(function(response) {
+        if (response) {
+            console.log(response);
+            loadTask(response)
+        }
+    });
+}
+
+function loadTask(task) {
+    num_of_images = task.num_of_images;
     answers = new Array(num_of_images).fill(null);
 
-    $('#categoryDiv span').text(category);
+    $('#categoryDiv span').text(task.category);
     updateImages();
 }
-get_task(callback);
 
-function next() {
+function nextImage() {
     if (current_num < num_of_images - 1) {
         current_num += 1;
         updateImages();
+        updateSubmitButton();
     }
 }
-function previous() {
+function prevImage() {
     if (current_num > 0) {
         current_num -= 1;
         updateImages();
+        updateSubmitButton();
     }
 }
-function toggleAnswer() {
-    answers[current_num] = !(answers[current_num]);
-    updateImages();
+function updateImages() {
+    for (var i=-3; i<=3 ; i++) {
+        var holderDiv = "#holderDiv" + i.toString();
+        var holderImage = "#holderImage" + i.toString();
+        var image_num = current_num + i;
+        if (image_num >= 0 && image_num < num_of_images) {
+            $(holderDiv).css('visibility', 'visible');
+            $(holderImage).attr('src', getImageURL(image_num));
+
+            // Set default answer
+            if (image_num == current_num && answers[image_num] == null) {
+                answers[image_num] = false;
+            }
+
+            if (answers[image_num] == true) {
+                $(holderDiv).toggleClass("target", true);
+                $(holderDiv).toggleClass("noise", false);
+            } else if (answers[image_num] == false) {
+                $(holderDiv).toggleClass("target", false);
+                $(holderDiv).toggleClass("noise", true);
+            } else if (answers[image_num] == null) {
+                $(holderDiv).toggleClass("target", false);
+                $(holderDiv).toggleClass("noise", false);
+            }
+
+        } else {
+            $(holderDiv).css('visibility','hidden');
+        }
+    }
 }
+
 function updateSubmitButton() {
     var images_left = num_of_images - answers.filter(function(value) { return value !== null }).length;
     $("#submitButton").attr('value', "Submit (" + images_left + " images left)"); 
@@ -42,37 +76,11 @@ function updateSubmitButton() {
     }
 }
 
-function updateImages() {
-    for (var i=-3; i<=3 ; i++) {
-        var holderDiv = "#holderDiv" + i.toString();
-        var holderImage = "#holderImage" + i.toString();
-        var image_num = current_num + i;
-        if (image_num >= 0 && image_num < num_of_images) {
-            $(holderImage).attr('src', get_image_url(image_num));
-
-            // Set default answer
-            if (image_num == current_num && answers[image_num] == null) {
-                answers[image_num] = false;
-            }
-
-            if (answers[image_num] == null) {
-                $(holderDiv).toggleClass("target", false);
-                $(holderDiv).toggleClass("noise", false);
-            }
-            else if (answers[image_num]) {
-                $(holderDiv).toggleClass("target", true);
-                $(holderDiv).toggleClass("noise", false);
-            } else {
-                $(holderDiv).toggleClass("target", false);
-                $(holderDiv).toggleClass("noise", true);
-            }
-            $(holderDiv).css('visibility','visible');
-        } else {
-            $(holderDiv).css('visibility','hidden');
-        }
-    }
-    updateSubmitButton();
+function toggleAnswer() {
+    answers[current_num] = !(answers[current_num]);
+    updateImages();
 }
+
 function confirmSubmit() {
     confirm(answers);
 }
@@ -88,15 +96,15 @@ $(window).keydown(function(e){
     if ( ! keyIsDown){
         if (key === 39 || key == 68){
             keyIsDown = true;
-            next();
+            nextImage();
             clearInterval(timerHandle);
-            timerHandle = setInterval(next, 400);         
+            timerHandle = setInterval(nextImage, 400);         
         }
         else if(key === 37 || key == 65){
             keyIsDown = true;
-            previous();
+            prevImage();
             clearInterval(timerHandle);
-            timerHandle = setInterval(previous, 400);         
+            timerHandle = setInterval(prevImage, 400);         
         }
     }
 });
