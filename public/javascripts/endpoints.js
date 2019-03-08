@@ -1,22 +1,22 @@
-var href = window.location.href;
-var url = href.split('?')[0];
-var query = href.split('?')[1];
 
-var base_url = parseBaseURL(url);
-var params = parseParams(query);;
+
+var base_url = parseBaseURL();
 
 //
 // Get Requests
 //
-function getImageURL(num) {
-  var new_params = {};
-  new_params["task_id"] = params["task_id"];
-  new_params["image_num"] = num;
-  return base_url + "/data/images?" + buildQuery(new_params);
-}
-function getTask(callback) {
-  var endpoint = base_url + "/data/task?" + query;
+function getBundle(params, callback) {
+  var endpoint = base_url + "/bundles/" + params.bundle_id + ".json";
   get_async(endpoint, callback);
+}
+function getImageURL(params) {
+  var image_url = base_url;
+  if (params.dataset == "ade20k" || params.dataset == "coco" || params.dataset == "places") {
+      image_url = "http://places.csail.mit.edu/scaleplaces/datasets";
+  }
+
+  var endpoint = image_url + "/" + params.dataset + "/images/" + params.file_name;
+  return endpoint;
 }
 
 //
@@ -54,17 +54,23 @@ function post(url, json) {
 //
 // Parse URL functions
 //
-function parseBaseURL(url) {
+function parseBaseURL() {
+  var href = window.location.href;
+  var url = href.split('?')[0];
+  var query = href.split('?')[1];
+
   var split = url.split('/');
   var base_url = split[0] +"/" + split[1] + "/" + split[2];
   return base_url
 }
-function parseParams(query) {
-  var params = {}
+function parseURLParams() {
+  var href = window.location.href;
+  var query = href.split('?')[1];
   if ( ! query) {
-    return params;
+    return {};
   }
 
+  var params = {}
   var query_split = query.split("&");
   for (var i in query_split) {
     split = query_split[i].split("=");
@@ -73,6 +79,12 @@ function parseParams(query) {
     params[key] = value;
   }
   return params;
+}
+function setURLParams(params) {
+  var href = window.location.href;
+  var url = href.split('?')[0];
+  var path = url.replace(base_url, "");
+  window.history.pushState(null, null, path + "?" + buildQuery(params));
 }
 function buildQuery(params) {
   query = ""; 

@@ -1,22 +1,31 @@
 
+var params = parseURLParams();
+if (Object.keys(params).length == 0) {
+    // Default params
+    params.bundle_id = "example";
+    setURLParams(params);
+}
+
+var coco = new COCO();
 var current_num = 0;
 var num_of_images = 0;
-var answers = [];
 
 window.onload = function() {
-    getTask(function(response) {
-        if (response) {
-            console.log(response);
-            loadTask(response)
-        }
+    getBundle(params, function(res) {
+        console.log(res);
+        coco = new COCO(res);
+        loadBundle(coco);
     });
 }
 
-function loadTask(task) {
-    num_of_images = task.num_of_images;
-    answers = new Array(num_of_images).fill(null);
+function loadBundle(coco) {
+    var imgs = coco.dataset.images;
+    var anns = coco.dataset.annotations;
+    var cats = coco.dataset.categories;
 
-    $('#categoryDiv span').text(task.category);
+    num_of_images = imgs.length;
+
+    $('#categoryDiv span').text("what");
     updateImages();
 }
 
@@ -40,21 +49,26 @@ function updateImages() {
         var holderImage = "#holderImage" + i.toString();
         var image_num = current_num + i;
         if (image_num >= 0 && image_num < num_of_images) {
+
+            var img = coco.dataset.images[image_num];
+            var img_params = {"dataset": "demo", "file_name": img.file_name}
+            var image_url = getImageURL(img_params);
+
             $(holderDiv).css('visibility', 'visible');
-            $(holderImage).attr('src', getImageURL(image_num));
+            $(holderImage).attr('src', image_url);
 
             // Set default answer
-            if (image_num == current_num && answers[image_num] == null) {
-                answers[image_num] = false;
+            if (image_num == current_num && img["answer"] == null) {
+                img["answer"] = false;
             }
 
-            if (answers[image_num] == true) {
+            if (img["answer"] == true) {
                 $(holderDiv).toggleClass("target", true);
                 $(holderDiv).toggleClass("noise", false);
-            } else if (answers[image_num] == false) {
+            } else if (img["answer"] == false) {
                 $(holderDiv).toggleClass("target", false);
                 $(holderDiv).toggleClass("noise", true);
-            } else if (answers[image_num] == null) {
+            } else {
                 $(holderDiv).toggleClass("target", false);
                 $(holderDiv).toggleClass("noise", false);
             }
@@ -66,7 +80,14 @@ function updateImages() {
 }
 
 function updateSubmitButton() {
-    var images_left = num_of_images - answers.filter(function(value) { return value !== null }).length;
+    var imgs = coco.dataset.images;
+    var images_left = 0;
+    for (var i = 0; i < imgs.length; i++) {
+        if (imgs[i]["answer"] == null) {
+            images_left += 1;
+        }
+    }
+
     $("#submitButton").attr('value', "Submit (" + images_left + " images left)"); 
     $("#submitButton").prop('disabled', true); 
 
@@ -77,12 +98,13 @@ function updateSubmitButton() {
 }
 
 function toggleAnswer() {
-    answers[current_num] = !(answers[current_num]);
+    var img = coco.dataset.images[current_num];
+    img["answer"] = !(img["answer"]);
     updateImages();
 }
 
 function confirmSubmit() {
-    confirm(answers);
+    confirm(coco.dataset.images);
 }
 function toggleClarification() {
     $("#clarificationDiv").toggle()
