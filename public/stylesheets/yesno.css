@@ -1,7 +1,59 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#questionDiv {
+    width: 1000px;
+    height: 30px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size:25px;
+    font-weight:bold;
+}
+#submitButton {
+  display: inline-block;
+}
+
+#clarificationDiv {
+  width: 822px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 10px;
+  text-align: left; 
+  display:none;
+}
+
+#categoryDiv {
+  width: 822px;
+  height:30px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 15px;
+  text-align: center;
+}
+
+#yesnoDiv {
+  width: 1000px;
+  height: 300px;
+  display: table;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 13pt;
+}
+
 .target{
   color: #0D0;
 }
-.target img{
+.target canvas{
   border: 3px solid #0D0;
 }
 .target p:first-child{
@@ -13,7 +65,7 @@
 .noise{
   color: #F00;
 }
-.noise img{
+.noise canvas{
   border: 3px solid #F00;
 }
 .noise p:first-child{
@@ -51,17 +103,23 @@
   width: 25px;  height: 100%; 
 } 
 
-.focus img{ 
+canvas {
+  background: black;
+}
+
+.focus canvas{ 
   max-width: 600px;
   max-height: 400px;
+  min-width: 300px;
+  min-height: 200px;
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0px;   
-  border-width: 12px; 
+  border-width: 12px;
 } 
 
-.focus1 img{ 
+.focus1 canvas{ 
   max-width: 88px;
   max-height: 88px;
   display: block;
@@ -71,7 +129,7 @@
   border-width: 6px; 
 } 
 
-.focus2 img{ 
+.focus2 canvas{ 
   max-width: 42px;
   max-height: 42px;
   display: block;
@@ -80,7 +138,7 @@
   margin-bottom: 0px;
   border-width: 4px; 
 } 
-.focus3 img{ 
+.focus3 canvas{ 
   max-width: 21px;
   max-height: 21px;
   display: block;

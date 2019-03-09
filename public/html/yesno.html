@@ -9,40 +9,36 @@
     <title>YesNoInterface</title>
 
     <link href="stylesheets/yesno.css" rel="stylesheet">
-    <link href="stylesheets/style.css" rel="stylesheet">
 
 </head>
 <body>
     <div id="questionDiv">
         <button onclick="toggleClarification(); " type="button">Instruction</button>
-        <span> Does this annotation need major improvements? </span>
+        <span> Does this annotation have IOU > 0.7? </span>
         <input type="submit" id="submitButton" value="Submit (? images left)" disabled onclick="return confirmSubmit()">
     </div>
 
     <div id="clarificationDiv">
         <dl>
-            <dt>An annotation needs major improvements if: </dt>
-                <dd>- something not belong to this category was highlighted.</dd>
-                <dd>- something belonging to this category was not highlighted.</dd>
-                <dd>- something belonging to this category was entirely missed.</dd>
+            <dt>Todo: </dt>
+                <dd>- one</dd>
+                <dd>- two</dd>
+                <dd>- three</dd>
         </ul>
-        
-        <p><i><b>Note: </b> These annotations are computer generated. </i></p>
-        <p> At this stage, be lenient. Fine detail refinements along edges will be done later. </p>
     </div>
 
     <div id="categoryDiv">
         <b>Category: </b><span>None</span>
     </div>
 
-    <div id="contentDiv">
-        <div id="holderDiv-3" class="focus3"><p>No</p><p>Yes</p><img id="holderImage-3"></div>
-        <div id="holderDiv-2" class="focus2"><p>No</p><p>Yes</p><img id="holderImage-2"></div>
-        <div id="holderDiv-1" class="focus1"><p>No</p><p>Yes</p><img id="holderImage-1"></div>
-        <div id="holderDiv0" class="focus"><p>No</p><p>Yes</p><img id="holderImage0"></div>
-        <div id="holderDiv1" class="focus1"><p>No</p><p>Yes</p><img id="holderImage1"></div>
-        <div id="holderDiv2" class="focus2"><p>No</p><p>Yes</p><img id="holderImage2"></div>
-        <div id="holderDiv3" class="focus3"><p>No</p><p>Yes</p><img id="holderImage3"></div>
+    <div id="yesnoDiv">
+        <div id="holderDiv-3" class="focus3"><p>No</p><p>Yes</p><canvas></canvas></div>
+        <div id="holderDiv-2" class="focus2"><p>No</p><p>Yes</p><canvas></canvas></div>
+        <div id="holderDiv-1" class="focus1"><p>No</p><p>Yes</p><canvas></canvas></div>
+        <div id="holderDiv0" class="focus"><p>No</p><p>Yes</p><canvas></canvas></div>
+        <div id="holderDiv1" class="focus1"><p>No</p><p>Yes</p><canvas></canvas></div>
+        <div id="holderDiv2" class="focus2"><p>No</p><p>Yes</p><canvas></canvas></div>
+        <div id="holderDiv3" class="focus3"><p>No</p><p>Yes</p><canvas></canvas></div>
     </div>
 
     <!-- jQuery -->
@@ -52,7 +48,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script src="javascripts/coco.js"></script>
+    <script src="javascripts/rle.js"></script>
     <script src="javascripts/endpoints.js"></script>
+    <script src="javascripts/yesno.js"></script>
     <script src="javascripts/main.js"></script>
 </body>
 
